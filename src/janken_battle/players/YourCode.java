@@ -16,7 +16,7 @@ public class YourCode implements JankenPlayer {
     public String getName() {
         // TODO
         // プレイヤーの名前を半角英数で入力してください。
-        return "YourCode";
+        return "YourCodetest";
     }
 
     @Override
