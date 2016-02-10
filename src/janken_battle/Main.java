@@ -89,6 +89,7 @@ public class Main {
         private final JankenPlayer me;
         private final JankenPlayer enemy;
         private final JankenStatus status;
+        private boolean isIntentionalFoul = false;
 
         JankenBattleField(JankenPlayer me, JankenPlayer enemy) {
             this.me = me;
@@ -98,16 +99,34 @@ public class Main {
 
         void battle() {
             for (int i = 0; i < 100; i++) {
-                oneBout(i+1);
+                if (!isIntentionalFoul) {
+                    isIntentionalFoul = oneBout(i+1);
+                }
             }
         }
 
         /**
-         * 1回じゃんけんします。
+         * 1回じゃんけんします。各プレイヤーがexceptionを投げた場合はtrueが代えます。
          */
-        private void oneBout(int gameNumber) {
-            Hand myHand = me.getHand(status.getMyHands(), status.getEnemyHands(), status.getMyPoint(), status.getEnemyPoint(),gameNumber);
-            Hand enemyHand = enemy.getHand(status.getEnemyHands(), status.getMyHands(), status.getEnemyPoint(), status.getMyPoint(),gameNumber);
+        private boolean oneBout(int gameNumber) {
+            Hand myHand = null;
+            Hand enemyHand = null;
+            try {
+                myHand = me.getHand(status.getMyHands(), status.getEnemyHands(), status.getMyPoint(), status.getEnemyPoint(), gameNumber);
+            } catch(Exception e){
+                System.out.println("プレイヤー "+me.getName()+" の反則負けです。");
+                //反則時は問答無用でポイントを-300にする
+                status.myPoint = -300;
+                return true;
+            }
+            try {
+                enemyHand = enemy.getHand(status.getEnemyHands(), status.getMyHands(), status.getEnemyPoint(), status.getMyPoint(), gameNumber);
+            } catch(Exception e){
+                System.out.println("プレイヤー "+enemy.getName()+" の反則負けです。");
+                //反則時は問答無用でポイントを-300にする
+                status.enemyPoint = -300;
+                return true;
+            }
             status.myHandsAdd(myHand);
             status.enemyHandsAdd(enemyHand);
             if (myHand == Hand.G) {
@@ -129,6 +148,7 @@ public class Main {
                     status.enemyPointAdd(6);
                 }
             }
+            return false;
         }
 
         /**
