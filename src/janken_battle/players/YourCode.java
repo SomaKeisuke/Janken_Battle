@@ -7,6 +7,7 @@ import java.util.Map;
 
 import janken_battle.Main.Hand;
 import janken_battle.Main.JankenPlayer;
+import janken_battle.players.Sample;
 
 /**
  *
