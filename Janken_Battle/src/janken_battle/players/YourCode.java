@@ -10,7 +10,7 @@ import janken_battle.Main.JankenPlayer;
 import janken_battle.players.Sample;
 
 /**
- *
+ * pushテスト用
  * 出す順番が決まっているサンプルを複数セットして、
  * 成績の良いサンプルを残して戦わせる感じです。
  *
