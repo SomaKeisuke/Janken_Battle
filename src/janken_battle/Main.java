@@ -113,6 +113,10 @@ public class Main {
             Hand enemyHand = null;
             try {
                 myHand = me.getHand(status.getMyHands(), status.getEnemyHands(), status.getMyPoint(), status.getEnemyPoint(), gameNumber);
+                //nullの場合は反則負け
+                if (myHand == null) {
+                    throw new Exception();
+                }
             } catch(Exception e){
                 System.out.println("プレイヤー "+me.getName()+" の反則負けです。");
                 //反則時は問答無用でポイントを-300にする
@@ -121,6 +125,9 @@ public class Main {
             }
             try {
                 enemyHand = enemy.getHand(status.getEnemyHands(), status.getMyHands(), status.getEnemyPoint(), status.getMyPoint(), gameNumber);
+                if (enemyHand == null) {
+                    throw new Exception();
+                }
             } catch(Exception e){
                 System.out.println("プレイヤー "+enemy.getName()+" の反則負けです。");
                 //反則時は問答無用でポイントを-300にする
