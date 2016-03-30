@@ -197,7 +197,13 @@ public class Main {
 
         private static String getHandsListString(String name, List<Hand> hands) {
             StringBuilder sb = new StringBuilder();
-            sb.append((name + "                    ").substring(0, 20));
+            if (name.equals("強き手を極めんとするもの")) {
+                sb.append((name + "                          ").substring(0, 14));
+            } else if (name.equals("akiyama連合軍")) {
+                sb.append((name + "                          ").substring(0, 23));
+            } else {
+                sb.append((name + "                          ").substring(0, 26));
+            }
             sb.append(":");
             for (int i = 0; i < hands.size(); i++) {
                 if (i % 10 == 0) {
@@ -289,9 +295,77 @@ public class Main {
 
     private static void printBattleResult(List<Class<JankenPlayer>> players, String[][] result, int[] winnerPoint,
             int[] point) throws InstantiationException, IllegalAccessException {
-        StringBuilder sb = new StringBuilder("                       |");
+
+//        System.out.println("第12位・・・・ 4勝 9敗 0引分 WinP:12 TotalP:2136 ");
+//        System.out.println("小塙さん");
+//        System.out.println("第11位・・・・○勝○敗○引分 WinP:   TotalP: ");
+//        System.out.println("○○さん");
+//        System.out.println("第10位・・・・○勝○敗○引分 WinP:   TotalP: ");
+//        System.out.println("○○さん");
+//        System.out.println("第 9位・・・・○勝○敗○引分 WinP:   TotalP: ");
+//        System.out.println("○○さん");
+//        System.out.println("第 8位・・・・○勝○敗○引分 WinP:   TotalP: ");
+//        System.out.println("○○さん");
+//        System.out.println("第 7位・・・・○勝○敗○引分 WinP:   TotalP: ");
+//        System.out.println("○○さん");
+//        System.out.println("第 6位・・・・○勝○敗○引分 WinP:   TotalP: ");
+//        System.out.println("○○さん");
+//        System.out.println("第 5位・・・・○勝○敗○引分 WinP:   TotalP: ");
+//        System.out.println("○○さん");
+//        System.out.println("第 4位・・・・○勝○敗○引分 WinP:   TotalP: ");
+//        System.out.println("○○さん");
+//
+//        System.out.println("");
+//
+//        System.out.println("ここまで残プレイヤー ○○さん,○○さん,○○さん,○○さん,○○さん,○○さん");
+//
+//        System.out.println("");
+//
+//        System.out.println("第12位・・・・○勝○敗○引分 WinP:   TotalP: ");
+//        System.out.println("○○さん ×ゲーム 飲み会一発芸×1");
+//        System.out.println("");
+//
+//        System.out.println("第 3位・・・・○勝○敗○引分 WinP:   TotalP: ");
+//        System.out.println("○○さん 200円分のお菓子プレゼント!!");
+//        System.out.println("");
+//
+//        System.out.println("第13位・・・・○勝○敗○引分 WinP:   TotalP: ");
+//        System.out.println("○○さん ×ゲーム 飲み会一発芸×2");
+//        System.out.println("");
+//
+//        System.out.println("第14位・・・・○勝○敗○引分 WinP:   TotalP: ");
+//        System.out.println("○○さん ×ゲーム 飲み会一発芸×2 + 朝ミーティング一発芸×1");
+//        System.out.println("");
+//
+//        System.out.println("第 2位・・・・○勝○敗○引分 WinP:   TotalP: ");
+//        System.out.println("○○さん 1000円分の飲み代プレゼント!!");
+//        System.out.println("");
+//
+//        System.out.println("                            ＊  ＊       巛 ヽ  ＊   ");
+//        System.out.println("                                            〒  !       ");
+//        System.out.println("                           +     +    。    |   |      ");
+//        System.out.println("                      ＊      |＼∧／|  /  /       ");
+//        System.out.println("                               |_〔〕＿__|/  /     ");
+//        System.out.println("                              （´∀｀  /  /  + ");
+//        System.out.println("                               ,-    ○   ｆ    ");
+//        System.out.println("                             / ｭﾍ  男   | ＊ ");
+//        System.out.println("                            〈＿｝ ）      |        ＊ ");
+//        System.out.println("                                 /        ! +   ");
+//        System.out.println("                               ./    ,ﾍ   |    ");
+//        System.out.println("                         |  ||| j    /  |   ||||   ");
+//        System.out.println("");
+//
+//        System.out.println("第 1位・・・・○勝○敗○引分 WinP:   TotalP: ");
+//        System.out.println("○○さん 3000円分の飲み代プレゼント!!");
+//        System.out.println("");
+
+
+        StringBuilder sb = new StringBuilder("                            |");
         for (int i = 0; i < players.size(); i++) {
-            sb.append(" ");
+            if (i < 9) {
+                sb.append(" ");
+            }
+
             sb.append(i + 1);
         }
         sb.append("|");
@@ -300,16 +374,26 @@ public class Main {
         sb.append("TOTALP");
         sb.append("|");
         sb.append("\r\n");
-        sb.append("------------------------");
+        sb.append("-----------------------------");
         for (int i = 0; i < players.size(); i++) {
             sb.append("--");
         }
         sb.append("-------------");
         sb.append("\r\n");
         for (int i = 0; i < players.size(); i++) {
-            sb.append((String.valueOf(i + 1)
-                    + "."
-                    + players.get(i).newInstance().getName() + "                       ").substring(0, 23));
+            if (players.get(i).newInstance().getName().equals("強き手を極めんとするもの")) {
+                sb.append((String.valueOf(i + 1)
+                        + "."
+                        + players.get(i).newInstance().getName() + "                       ").substring(0, 16));
+            } else if (players.get(i).newInstance().getName().equals("akiyama連合軍")) {
+                sb.append((String.valueOf(i + 1)
+                        + "."
+                        + players.get(i).newInstance().getName() + "                       ").substring(0, 25));
+            } else {
+                sb.append((String.valueOf(i + 1)
+                        + "."
+                        + players.get(i).newInstance().getName() + "                       ").substring(0, 28));
+            }
             sb.append("|");
             for (int j = 0; j < players.size(); j++) {
                 sb.append(result[i][j]);
